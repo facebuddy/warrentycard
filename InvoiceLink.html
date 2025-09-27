@@ -70,13 +70,13 @@
       .details {
         position: absolute;
         top: 50%;
-        left: 4.6rem;
-        right: 2.4rem;
+        left: clamp(3.1rem, 8.6vw, 4.4rem);
+        right: clamp(1rem, 6.6vw, 2.3rem);
         transform: translateY(-50%);
         display: grid;
-        gap: 0.55rem;
-        font-size: 1rem;
-        line-height: 1.4;
+        gap: clamp(0.38rem, 1vw, 0.6rem);
+        font-size: clamp(0.85rem, 0.6rem + 0.75vw, 0.98rem);
+        line-height: 1.33;
         color: var(--card-text-color);
         text-shadow: 0 0 10px var(--card-shadow-color);
         padding: 0;
@@ -86,22 +86,23 @@
       .details p {
         margin: 0;
         display: grid;
-        grid-template-columns: auto 1fr;
+        grid-template-columns: minmax(86px, max-content) minmax(0, 1fr);
         align-items: center;
-        column-gap: 0.75rem;
+        column-gap: clamp(0.45rem, 1.15vw, 0.85rem);
         font-weight: 500;
         letter-spacing: 0.01em;
       }
 
       .detail-label {
         font-weight: 600;
-        min-width: 100px;
         text-align: left;
       }
 
       .detail-value {
         font-weight: 500;
         text-align: left;
+        min-width: 0;
+        overflow-wrap: anywhere;
       }
 
       .card-footer {
@@ -139,12 +140,46 @@
         }
 
         .details {
-          left: 3.6rem;
-          right: 1.2rem;
+          left: clamp(2.6rem, 7vw, 3.4rem);
+          right: clamp(0.5rem, 5vw, 1.1rem);
+          font-size: clamp(0.82rem, 0.7rem + 0.6vw, 0.95rem);
+        }
+      }
+
+      @media (max-width: 420px) {
+        .card {
+          border-radius: 16px;
         }
 
-        .detail-label {
-          min-width: 102px;
+        .details {
+          left: 2.7rem;
+          right: 0.55rem;
+          gap: 0.36rem;
+          font-size: clamp(0.82rem, 0.74rem + 0.4vw, 0.92rem);
+        }
+
+        .details p {
+          grid-template-columns: minmax(74px, max-content) minmax(0, 1fr);
+          column-gap: 0.45rem;
+        }
+      }
+
+      @media (max-width: 340px) {
+        .serial-number {
+          left: 0.75rem;
+          font-size: 0.85rem;
+          letter-spacing: 0.12em;
+        }
+
+        .details {
+          left: 2.6rem;
+          right: 0.55rem;
+          font-size: clamp(0.78rem, 0.72rem + 0.4vw, 0.88rem);
+        }
+
+        .card-footer {
+          font-size: 0.8rem;
+          letter-spacing: 0.22rem;
         }
       }
     </style>
