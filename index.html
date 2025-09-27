@@ -1,3 +1,293 @@
-<html>
-    
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Warranty Card Gallery</title>
+    <style>
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        background-color: transparent;
+        padding: 2rem 1rem 3rem;
+        color: #111111;
+      }
+
+      main {
+        max-width: 520px;
+        margin: 0 auto;
+      }
+
+      .cards {
+        display: flex;
+        flex-direction: column;
+        gap: 1.75rem;
+      }
+
+      .card {
+        position: relative;
+        aspect-ratio: 3 / 2;
+        width: 100%;
+        border-radius: 20px;
+        overflow: hidden;
+        background-size: cover;
+        background-position: center;
+        --card-text-color: #ffffff;
+        --card-shadow-color: rgba(0, 0, 0, 0.65);
+      }
+
+      .logo-wrapper {
+        position: absolute;
+        top: 1.2rem;
+        right: 1.2rem;
+        z-index: 2;
+      }
+
+      .logo-wrapper img {
+        max-height: 44px;
+        max-width: 118px;
+        width: auto;
+        height: auto;
+        object-fit: contain;
+        display: block;
+      }
+
+      .serial-number {
+        position: absolute;
+        top: 50%;
+        left: 1.35rem;
+        transform: translateY(-50%);
+        writing-mode: vertical-rl;
+        text-orientation: mixed;
+        font-weight: 600;
+        letter-spacing: 0.18em;
+        color: var(--card-text-color);
+        text-shadow: 0 0 10px var(--card-shadow-color);
+        padding: 1.2rem 0.55rem 0.9rem;
+        z-index: 2;
+      }
+
+      .details {
+        position: absolute;
+        top: 50%;
+        left: 2.4rem;
+        right: 2.4rem;
+        transform: translateY(-50%);
+        display: grid;
+        gap: 0.55rem;
+        font-size: 1rem;
+        line-height: 1.4;
+        color: var(--card-text-color);
+        text-shadow: 0 0 10px var(--card-shadow-color);
+        padding: 0;
+        z-index: 2;
+      }
+
+      .details p {
+        margin: 0;
+        display: grid;
+        grid-template-columns: auto 1fr;
+        align-items: center;
+        column-gap: 0.75rem;
+        font-weight: 500;
+        letter-spacing: 0.01em;
+      }
+
+      .detail-label {
+        font-weight: 600;
+        min-width: 120px;
+        text-align: left;
+      }
+
+      .detail-value {
+        font-weight: 500;
+        text-align: left;
+      }
+
+      .card-footer {
+        position: absolute;
+        bottom: 1rem;
+        width: 100%;
+        text-align: center;
+        font-weight: 600;
+        letter-spacing: 0.28rem;
+        color: var(--card-text-color);
+        text-shadow: 0 0 10px var(--card-shadow-color);
+        z-index: 2;
+      }
+
+      @media (max-width: 560px) {
+        body {
+          padding: 1.5rem 1rem 2.5rem;
+        }
+
+        .card {
+          border-radius: 18px;
+        }
+
+        .logo-wrapper {
+          top: 0.9rem;
+          right: 0.9rem;
+        }
+
+        .logo-wrapper img {
+          max-height: 38px;
+        }
+
+        .serial-number {
+          left: 1rem;
+        }
+
+        .details {
+          left: 1.8rem;
+          right: 1.2rem;
+        }
+
+        .detail-label {
+          min-width: 102px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <section class="cards" id="warrantyCards" aria-live="polite"></section>
+    </main>
+
+    <script>
+      const warrantyCards = [
+        {
+          name: "Cairnhill",
+          background: "img/CairnhillBackground.jpg",
+          logo: "img/Cairnhilllogo.png",
+          serialNumber: "00001",
+          modelNumber: "CX-100",
+          issueDate: "01/09/2025",
+          expireDate: "01/09/2026",
+          textColor: "#f5f7fa",
+          textShadow: "rgba(0, 0, 0, 0.7)",
+        },
+        {
+          name: "Cellox",
+          background: "img/CelloxBackGround.jpg",
+          logo: "img/Celloxlogo.png",
+          serialNumber: "00002",
+          modelNumber: "CX-200",
+          issueDate: "15/09/2025",
+          expireDate: "15/09/2026",
+          textColor: "#1d1f20",
+          textShadow: "rgba(255, 255, 255, 0.65)",
+        },
+        {
+          name: "Credence",
+          background: "img/CredenceBackground.jpg",
+          logo: "img/Credencelogo.png",
+          serialNumber: "00003",
+          modelNumber: "CR-125",
+          issueDate: "22/09/2025",
+          expireDate: "22/09/2026",
+          textColor: "#f6f8fb",
+          textShadow: "rgba(0, 0, 0, 0.7)",
+        },
+        {
+          name: "Montrex",
+          background: "img/MontrexBackGround.jpg",
+          logo: "img/Montrexlogo.png",
+          serialNumber: "00004",
+          modelNumber: "MT-510",
+          issueDate: "05/10/2025",
+          expireDate: "05/10/2026",
+          textColor: "#1a1a1a",
+          textShadow: "rgba(255, 255, 255, 0.55)",
+        },
+        {
+          name: "Regent",
+          background: "img/RegentBackground.jpg",
+          logo: "img/RegentLogo.png",
+          serialNumber: "00005",
+          modelNumber: "RG-350",
+          issueDate: "12/10/2025",
+          expireDate: "12/10/2026",
+          textColor: "#f5f5f5",
+          textShadow: "rgba(0, 0, 0, 0.7)",
+        },
+        {
+          name: "Richmond",
+          background: "img/RichMondBackground.jpg",
+          logo: "img/Richmondlogo.png",
+          serialNumber: "00006",
+          modelNumber: "RM-845",
+          issueDate: "20/10/2025",
+          expireDate: "20/10/2026",
+          textColor: "#fefefe",
+          textShadow: "rgba(0, 0, 0, 0.75)",
+        },
+      ];
+
+      const cardsContainer = document.getElementById("warrantyCards");
+
+      warrantyCards.forEach((card) => {
+        const cardElement = document.createElement("article");
+        cardElement.className = "card";
+        cardElement.style.backgroundImage = `url(${card.background})`;
+        cardElement.setAttribute("role", "figure");
+        cardElement.setAttribute("aria-label", `${card.name} warranty card`);
+        if (card.textColor) {
+          cardElement.style.setProperty("--card-text-color", card.textColor);
+        }
+        if (card.textShadow) {
+          cardElement.style.setProperty("--card-shadow-color", card.textShadow);
+        }
+
+        const logoWrapper = document.createElement("div");
+        logoWrapper.className = "logo-wrapper";
+
+        const logoImage = document.createElement("img");
+        logoImage.src = card.logo;
+        logoImage.alt = `${card.name} logo`;
+
+        logoWrapper.appendChild(logoImage);
+        cardElement.appendChild(logoWrapper);
+
+        const serialNumber = document.createElement("span");
+        serialNumber.className = "serial-number";
+        serialNumber.textContent = card.serialNumber;
+        cardElement.appendChild(serialNumber);
+
+        const details = document.createElement("div");
+        details.className = "details";
+
+        const detailLines = [
+          { label: "Serial No:", value: card.serialNumber },
+          { label: "Name:", value: card.name },
+          { label: "Model No:", value: card.modelNumber },
+          { label: "Issue Date:", value: card.issueDate },
+          { label: "Expire Date:", value: card.expireDate },
+        ];
+
+        detailLines.forEach((line) => {
+          const paragraph = document.createElement("p");
+          const label = document.createElement("span");
+          label.className = "detail-label";
+          label.textContent = line.label;
+
+          const value = document.createElement("span");
+          value.className = "detail-value";
+          value.textContent = line.value;
+
+          paragraph.append(label, value);
+          details.appendChild(paragraph);
+        });
+
+        cardElement.appendChild(details);
+
+        const footer = document.createElement("div");
+        footer.className = "card-footer";
+        footer.textContent = "WARRANTY CARD";
+        cardElement.appendChild(footer);
+
+        cardsContainer.appendChild(cardElement);
+      });
+    </script>
+  </body>
 </html>
