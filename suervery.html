@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Existing Dealer Assessment Survey</title>
+  <style>
+    :root {
+      --primary: #1b365d;
+      --accent: #2d9cdb;
+      --bg: #f4f6fb;
+      --card-bg: #ffffff;
+      --text: #1f2933;
+      --muted: #6b7280;
+      --border: #d1d5db;
+      --radius: 16px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      padding: 48px 16px;
+    }
+
+    main {
+      width: min(960px, 100%);
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    h1 {
+      font-size: clamp(1.75rem, 3vw + 1rem, 2.5rem);
+      color: var(--primary);
+      margin-bottom: 8px;
+    }
+
+    header p {
+      color: var(--muted);
+      margin: 0;
+    }
+
+    form {
+      background: var(--card-bg);
+      border-radius: var(--radius);
+      padding: clamp(24px, 3vw, 36px);
+      box-shadow: 0 20px 40px rgba(27, 54, 93, 0.12);
+      display: grid;
+      gap: clamp(24px, 3vw, 36px);
+    }
+
+    .section {
+      display: grid;
+      gap: 16px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .section-number {
+      background: var(--primary);
+      color: white;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 999px;
+      font-size: 0.95rem;
+      letter-spacing: 0.02em;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: 1.25rem;
+    }
+
+    label {
+      font-weight: 600;
+      display: block;
+      color: var(--primary);
+      margin-bottom: 8px;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: #fdfdfe;
+      font: inherit;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+      resize: vertical;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 4px rgba(45, 156, 219, 0.15);
+    }
+
+    textarea {
+      min-height: 110px;
+    }
+
+    .table-wrapper {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      background: #fafbff;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 620px;
+    }
+
+    th,
+    td {
+      padding: 12px 16px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+      background: white;
+    }
+
+    th {
+      background: rgba(27, 54, 93, 0.08);
+      font-size: 0.9rem;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    td input,
+    td select,
+    td textarea {
+      border-radius: 8px;
+      padding: 10px 12px;
+    }
+
+    .table-controls {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 0 0;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 16px;
+      background: var(--accent);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .btn svg {
+      width: 18px;
+      height: 18px;
+      stroke: currentColor;
+      stroke-width: 2;
+      fill: none;
+    }
+
+    .btn:hover,
+    .btn:focus-visible {
+      transform: translateY(-1px);
+      box-shadow: 0 10px 22px rgba(45, 156, 219, 0.25);
+      outline: none;
+    }
+
+    .options-grid {
+      display: grid;
+      gap: 12px;
+    }
+
+    .options-grid label {
+      font-weight: 500;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .options-grid input[type="radio"],
+    .options-grid input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+    }
+
+    .inline-inputs {
+      display: grid;
+      gap: 12px;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    }
+
+    .footnotes {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    .form-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .secondary {
+      background: transparent;
+      color: var(--primary);
+      border: 1px solid var(--primary);
+      box-shadow: none;
+    }
+
+    .secondary:hover,
+    .secondary:focus-visible {
+      background: rgba(27, 54, 93, 0.08);
+      transform: none;
+      box-shadow: none;
+    }
+
+    .scroll-x {
+      overflow-x: auto;
+    }
+
+    @media (max-width: 768px) {
+      body {
+        padding: 24px 12px;
+      }
+
+      .section-header {
+        align-items: flex-start;
+      }
+
+      table {
+        min-width: 520px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Existing Dealer Assessment Survey</h1>
+      <p>Kindly complete the following form to help us understand your business better.</p>
+    </header>
+
+    <form id="assessment-form">
+      <section class="section" aria-labelledby="business-history">
+        <div class="section-header">
+          <span class="section-number">01</span>
+          <h2 id="business-history">Business History</h2>
+        </div>
+        <p class="footnotes">Provide a brief description about the evolution, milestones and background of your business.</p>
+        <textarea name="businessHistory" placeholder="Share notable milestones, years in operation, ownership details and other key highlights..." required></textarea>
+      </section>
+
+      <section class="section" aria-labelledby="branch-portfolio">
+        <div class="section-header">
+          <span class="section-number">02</span>
+          <h2 id="branch-portfolio">Branch Portfolio</h2>
+        </div>
+        <p class="footnotes">List all active showrooms you currently operate.</p>
+        <div class="scroll-x table-wrapper" data-table="branch">
+          <table aria-describedby="branch-portfolio">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Location</th>
+                <th scope="col">Showroom Name</th>
+                <th scope="col">Type</th>
+                <th scope="col">Brands Available</th>
+              </tr>
+            </thead>
+            <tbody id="branch-rows">
+              <tr>
+                <td>1</td>
+                <td><input type="text" name="branch[0][location]" placeholder="City / Area" required></td>
+                <td><input type="text" name="branch[0][name]" placeholder="Showroom Name" required></td>
+                <td>
+                  <select name="branch[0][type]" required>
+                    <option value="">Select</option>
+                    <option>Exclusive</option>
+                    <option>Multi-brand</option>
+                    <option>Studio</option>
+                    <option>Other</option>
+                  </select>
+                </td>
+                <td><input type="text" name="branch[0][brands]" placeholder="List of brands"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="table-controls">
+          <span class="footnotes">Add more branches if required.</span>
+          <button class="btn" type="button" data-add-row="branch">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 5v14M5 12h14" stroke-linecap="round"></path>
+            </svg>
+            Add Branch
+          </button>
+        </div>
+      </section>
+
+      <section class="section" aria-labelledby="business-volume">
+        <div class="section-header">
+          <span class="section-number">03</span>
+          <h2 id="business-volume">Total Monthly / Yearly Business Volume</h2>
+        </div>
+        <p class="footnotes">Share your average sales performance.</p>
+        <div class="scroll-x table-wrapper" data-table="volume">
+          <table aria-describedby="business-volume">
+            <thead>
+              <tr>
+                <th scope="col">Brand</th>
+                <th scope="col">Monthly (Units)</th>
+                <th scope="col">Monthly (Value)</th>
+                <th scope="col">Yearly (Units)</th>
+                <th scope="col">Yearly (Value)</th>
+              </tr>
+            </thead>
+            <tbody id="volume-rows">
+              <tr>
+                <td><input type="text" name="volume[0][brand]" placeholder="Brand Name" required></td>
+                <td><input type="number" name="volume[0][monthlyUnits]" min="0" placeholder="0"></td>
+                <td><input type="number" name="volume[0][monthlyValue]" min="0" placeholder="0"></td>
+                <td><input type="number" name="volume[0][yearlyUnits]" min="0" placeholder="0"></td>
+                <td><input type="number" name="volume[0][yearlyValue]" min="0" placeholder="0"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="table-controls">
+          <span class="footnotes">Include all applicable brands.</span>
+          <button class="btn" type="button" data-add-row="volume">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 5v14M5 12h14" stroke-linecap="round"></path>
+            </svg>
+            Add Brand
+          </button>
+        </div>
+      </section>
+
+      <section class="section" aria-labelledby="sales-force">
+        <div class="section-header">
+          <span class="section-number">04</span>
+          <h2 id="sales-force">Sales Floor &amp; Workforce</h2>
+        </div>
+        <div class="inline-inputs">
+          <div>
+            <label for="floor-size">Total Sales Floor Area</label>
+            <input type="text" id="floor-size" name="salesFloorArea" placeholder="e.g. 2500 sq.ft" required>
+          </div>
+          <div>
+            <label for="workers">Number of Workers</label>
+            <input type="number" id="workers" name="numberOfWorkers" min="0" placeholder="e.g. 12" required>
+          </div>
+        </div>
+        <label>Sales Team Experience (Tick all that apply)</label>
+        <div class="options-grid">
+          <label><input type="checkbox" name="salesExperience" value="FMCG"> FMCG</label>
+          <label><input type="checkbox" name="salesExperience" value="Electronics"> Electronics</label>
+          <label><input type="checkbox" name="salesExperience" value="Home Appliances"> Home Appliances</label>
+          <label><input type="checkbox" name="salesExperience" value="Automotive"> Automotive</label>
+          <label><input type="checkbox" name="salesExperience" value="Other"> Other</label>
+        </div>
+      </section>
+
+      <section class="section" aria-labelledby="profit-margin">
+        <div class="section-header">
+          <span class="section-number">05</span>
+          <h2 id="profit-margin">Profit Margin by Brand (%)</h2>
+        </div>
+        <p class="footnotes">Provide the average profit percentage earned on each brand.</p>
+        <div class="scroll-x table-wrapper" data-table="margin">
+          <table aria-describedby="profit-margin">
+            <thead>
+              <tr>
+                <th scope="col">Brand Name</th>
+                <th scope="col">Average Profit Margin (%)</th>
+              </tr>
+            </thead>
+            <tbody id="margin-rows">
+              <tr>
+                <td><input type="text" name="margin[0][brand]" placeholder="Brand Name" required></td>
+                <td><input type="number" name="margin[0][percentage]" min="0" max="100" step="0.1" placeholder="0"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="table-controls">
+          <span class="footnotes">Use percentage values.</span>
+          <button class="btn" type="button" data-add-row="margin">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 5v14M5 12h14" stroke-linecap="round"></path>
+            </svg>
+            Add Brand
+          </button>
+        </div>
+      </section>
+
+      <section class="section" aria-labelledby="stock-capacity">
+        <div class="section-header">
+          <span class="section-number">06</span>
+          <h2 id="stock-capacity">Stock Capacity &amp; Display Condition</h2>
+        </div>
+        <label for="display-condition">Describe your current stock holding capacity and display facilities</label>
+        <textarea id="display-condition" name="displayCondition" placeholder="Provide details on stock storage, showroom displays, warehousing and fast-moving categories..."></textarea>
+      </section>
+
+      <section class="section" aria-labelledby="payment-terms">
+        <div class="section-header">
+          <span class="section-number">07</span>
+          <h2 id="payment-terms">Payment Terms with Us</h2>
+        </div>
+        <div class="options-grid">
+          <label><input type="radio" name="paymentTerms" value="Full Cash" required> Full Cash</label>
+          <label><input type="radio" name="paymentTerms" value="Partial Credit"> Partial Credit</label>
+          <label><input type="radio" name="paymentTerms" value="Post-Dated Cheques"> Post-Dated Cheques</label>
+          <label><input type="radio" name="paymentTerms" value="Online Transfer"> Online Transfer</label>
+        </div>
+      </section>
+
+      <section class="section" aria-labelledby="delivery-mode">
+        <div class="section-header">
+          <span class="section-number">08</span>
+          <h2 id="delivery-mode">Delivery Mode</h2>
+        </div>
+        <div class="options-grid">
+          <label><input type="radio" name="deliveryMode" value="Self" required> Self Pickup</label>
+          <label><input type="radio" name="deliveryMode" value="Company"> Company Delivery</label>
+          <label><input type="radio" name="deliveryMode" value="3PL"> Third-Party Logistics</label>
+          <label><input type="radio" name="deliveryMode" value="Mixed"> Mixed</label>
+        </div>
+      </section>
+
+      <section class="section" aria-labelledby="brand-promotion">
+        <div class="section-header">
+          <span class="section-number">09</span>
+          <h2 id="brand-promotion">Brand's Proposals / Expectations from Your End</h2>
+        </div>
+        <textarea name="brandExpectations" placeholder="Let us know how we can collaborate better, marketing support required, service expectations, etc."></textarea>
+      </section>
+
+      <section class="section" aria-labelledby="remarks">
+        <div class="section-header">
+          <span class="section-number">10</span>
+          <h2 id="remarks">Remarks</h2>
+        </div>
+        <textarea name="remarks" placeholder="Additional notes, comments or clarifications"></textarea>
+      </section>
+
+      <div class="form-actions">
+        <button type="reset" class="btn secondary">Clear Form</button>
+        <button type="submit" class="btn">Submit Assessment</button>
+      </div>
+    </form>
+  </main>
+
+  <script>
+    const form = document.getElementById('assessment-form');
+    const templates = {
+      branch: () => `
+        <tr>
+          <td></td>
+          <td><input type="text" name="branch[{{index}}][location]" placeholder="City / Area" required></td>
+          <td><input type="text" name="branch[{{index}}][name]" placeholder="Showroom Name" required></td>
+          <td>
+            <select name="branch[{{index}}][type]" required>
+              <option value="">Select</option>
+              <option>Exclusive</option>
+              <option>Multi-brand</option>
+              <option>Studio</option>
+              <option>Other</option>
+            </select>
+          </td>
+          <td><input type="text" name="branch[{{index}}][brands]" placeholder="List of brands"></td>
+        </tr>`,
+      volume: () => `
+        <tr>
+          <td><input type="text" name="volume[{{index}}][brand]" placeholder="Brand Name" required></td>
+          <td><input type="number" name="volume[{{index}}][monthlyUnits]" min="0" placeholder="0"></td>
+          <td><input type="number" name="volume[{{index}}][monthlyValue]" min="0" placeholder="0"></td>
+          <td><input type="number" name="volume[{{index}}][yearlyUnits]" min="0" placeholder="0"></td>
+          <td><input type="number" name="volume[{{index}}][yearlyValue]" min="0" placeholder="0"></td>
+        </tr>`,
+      margin: () => `
+        <tr>
+          <td><input type="text" name="margin[{{index}}][brand]" placeholder="Brand Name" required></td>
+          <td><input type="number" name="margin[{{index}}][percentage]" min="0" max="100" step="0.1" placeholder="0"></td>
+        </tr>`
+    };
+
+    function refreshRowNumbers(tableId) {
+      document.querySelectorAll(`#${tableId} tr`).forEach((row, index) => {
+        const firstCell = row.querySelector('td:first-child');
+        if (!firstCell) return;
+        if (!firstCell.querySelector('input') && !firstCell.querySelector('select')) {
+          firstCell.textContent = index + 1;
+        }
+      });
+    }
+
+    function addRow(type) {
+      const tbody = document.getElementById(`${type}-rows`);
+      const index = tbody.children.length;
+      const template = templates[type]().replace(/{{index}}/g, index);
+      tbody.insertAdjacentHTML('beforeend', template);
+      refreshRowNumbers(`${type}-rows`);
+    }
+
+    document.querySelectorAll('[data-add-row]').forEach(button => {
+      button.addEventListener('click', () => {
+        const type = button.dataset.addRow;
+        addRow(type);
+      });
+    });
+
+    form.addEventListener('reset', () => {
+      setTimeout(() => {
+        ['branch', 'volume', 'margin'].forEach(type => {
+          const tbody = document.getElementById(`${type}-rows`);
+          [...tbody.children].forEach((row, idx) => {
+            if (idx > 0) row.remove();
+            else row.querySelectorAll('input, select').forEach(input => input.value = '');
+          });
+          refreshRowNumbers(`${type}-rows`);
+        });
+      }, 0);
+    });
+
+    form.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const data = new FormData(form);
+      const entries = {};
+
+      for (const [key, value] of data.entries()) {
+        if (key.includes('[')) {
+          const match = key.match(/(\w+)\[(\d+)\]\[(\w+)\]/);
+          if (!match) continue;
+          const [, group, index, field] = match;
+          entries[group] ??= [];
+          entries[group][index] ??= {};
+          entries[group][index][field] = value;
+        } else if (key === 'salesExperience') {
+          entries.salesExperience ??= [];
+          entries.salesExperience.push(value);
+        } else {
+          entries[key] = value;
+        }
+      }
+
+      console.table(entries);
+      alert('Thank you! Your responses have been captured in the console for review.');
+      form.reset();
+    });
+
+    ['branch', 'volume', 'margin'].forEach(type => refreshRowNumbers(`${type}-rows`));
+  </script>
+</body>
+</html>
