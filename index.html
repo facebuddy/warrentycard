@@ -55,7 +55,7 @@
       .serial-number {
         position: absolute;
         top: 50%;
-        left: 1.35rem;
+        left: 1 rem;
         transform: translateY(-50%);
         writing-mode: vertical-rl;
         text-orientation: mixed;
@@ -70,13 +70,13 @@
       .details {
         position: absolute;
         top: 50%;
-        left: clamp(3.1rem, 8.6vw, 4.4rem);
-        right: clamp(1rem, 6.6vw, 2.3rem);
+        left: 4.6rem;
+        right: 2.4rem;
         transform: translateY(-50%);
         display: grid;
-        gap: clamp(0.38rem, 1vw, 0.6rem);
-        font-size: clamp(0.85rem, 0.6rem + 0.75vw, 0.98rem);
-        line-height: 1.33;
+        gap: 0.55rem;
+        font-size: 1rem;
+        line-height: 1.4;
         color: var(--card-text-color);
         text-shadow: 0 0 10px var(--card-shadow-color);
         padding: 0;
@@ -86,23 +86,22 @@
       .details p {
         margin: 0;
         display: grid;
-        grid-template-columns: minmax(86px, max-content) minmax(0, 1fr);
+        grid-template-columns: auto 1fr;
         align-items: center;
-        column-gap: clamp(0.45rem, 1.15vw, 0.85rem);
+        column-gap: 0.75rem;
         font-weight: 500;
         letter-spacing: 0.01em;
       }
 
       .detail-label {
         font-weight: 600;
+        min-width: 100px;
         text-align: left;
       }
 
       .detail-value {
         font-weight: 500;
         text-align: left;
-        min-width: 0;
-        overflow-wrap: anywhere;
       }
 
       .card-footer {
@@ -136,58 +135,16 @@
         }
 
         .serial-number {
-          left: 0.75rem;
-        }
-
-	 .details {
-		  margin-top: clamp(5px, 1vw, 8px);
-		  left: clamp(2.6rem, 7vw, 3.4rem);
-		  right: clamp(0.5rem, 5vw, 1.1rem);
-		  font-size: clamp(0.9rem, 0.8rem + 0.6vw, 1.05rem);
-		  line-height: 1.35;
-		  gap: 0.34rem;
-		}
-      }
-
-      @media (max-width: 420px) {
-        .card {
-          border-radius: 16px;
+          left: 1rem;
         }
 
         .details {
-          left: 2.7rem;
-          right: 0.55rem;
-          gap: 0.3rem;
-          font-size: clamp(0.82rem, 0.74rem + 0.4vw, 0.92rem);
-          line-height: 1.24;
+          left: 3.6rem;
+          right: 1.2rem;
         }
 
-        .details p {
-          grid-template-columns: minmax(74px, max-content) minmax(0, 1fr);
-          column-gap: 0.45rem;
-        }
-      }
-
-      @media (max-width: 340px) {
-        .serial-number {
-          left: 0.5rem;
-          font-size: 0.85rem;
-          letter-spacing: 0.12em;
-        }
-
-				 .details {
-			  margin-top: 0.8rem; /* Added top margin */
-			  left: 2.6rem;
-			  right: 0.55rem;
-			  font-size: clamp(0.88rem, 0.8rem + 0.5vw, 1rem); /* Increased size */
-			  gap: 0.26rem;
-			  line-height: 1.3; /* Slightly taller for better readability */
-			}
-
-
-        .card-footer {
-          font-size: 0.8rem;
-          letter-spacing: 0.22rem;
+        .detail-label {
+          min-width: 102px;
         }
       }
     </style>
@@ -199,28 +156,6 @@
 
     <script>
       const warrantyCards = [
-	   {
-             name: "Md. Asib Al Amin",
-          background: "img/RegentBackground.jpg",
-          logo: "img/RegentLogo.png",
-          serialNumber: "00005",
-          modelNumber: "RG-350",
-          issueDate: "12/10/2025",
-          expireDate: "12/10/2026",
-          textColor: "#f5f5f5",
-          textShadow: "rgba(0, 0, 0, 0.7)",
-        },
-        {
-              name: "Md. Asib Al Amin",
-          background: "img/RichMondBackground.jpg",
-          logo: "img/Richmondlogo.png",
-          serialNumber: "00006",
-          modelNumber: "RM-845",
-          issueDate: "20/10/2025",
-          expireDate: "20/10/2026",
-          textColor: "#fefefe",
-          textShadow: "rgba(0, 0, 0, 0.75)",
-        },
         {
           name: "Md. Asib Al Amin",
           background: "img/CairnhillBackground.jpg",
@@ -265,7 +200,28 @@
           textColor: "#1a1a1a",
           textShadow: "rgba(255, 255, 255, 0.55)",
         },
-       
+        {
+             name: "Md. Asib Al Amin",
+          background: "img/RegentBackground.jpg",
+          logo: "img/RegentLogo.png",
+          serialNumber: "00005",
+          modelNumber: "RG-350",
+          issueDate: "12/10/2025",
+          expireDate: "12/10/2026",
+          textColor: "#f5f5f5",
+          textShadow: "rgba(0, 0, 0, 0.7)",
+        },
+        {
+              name: "Md. Asib Al Amin",
+          background: "img/RichMondBackground.jpg",
+          logo: "img/Richmondlogo.png",
+          serialNumber: "00006",
+          modelNumber: "RM-845",
+          issueDate: "20/10/2025",
+          expireDate: "20/10/2026",
+          textColor: "#fefefe",
+          textShadow: "rgba(0, 0, 0, 0.75)",
+        },
       ];
 
       const cardsContainer = document.getElementById("warrantyCards");
@@ -306,7 +262,7 @@
           { label: "Name:", value: card.name },
           { label: "Model No:", value: card.modelNumber },
           { label: "Issue Date:", value: card.issueDate },
-          { label: "Warranty valid for 2 years from the date of issue.",},
+          { label: "Expire Date:", value: card.expireDate },
         ];
 
         detailLines.forEach((line) => {
