@@ -115,6 +115,16 @@
         color: var(--card-text-color);
         text-shadow: 0 0 10px var(--card-shadow-color);
         z-index: 2;
+        display: grid;
+        justify-items: center;
+        gap: 0.4rem;
+      }
+
+      .card-footer .card-subtext {
+        font-size: clamp(0.65rem, 0.55rem + 0.4vw, 0.8rem);
+        letter-spacing: normal;
+        font-weight: 400;
+        text-transform: none;
       }
 
       @media (max-width: 560px) {
@@ -302,11 +312,9 @@
         details.className = "details";
 
         const detailLines = [
-      
           { label: "Name:", value: card.name },
           { label: "Model No:", value: card.modelNumber },
           { label: "Issue Date:", value: card.issueDate },
-          { label: "Warranty valid for 2 years from the date of issue.",},
         ];
 
         detailLines.forEach((line) => {
@@ -327,7 +335,15 @@
 
         const footer = document.createElement("div");
         footer.className = "card-footer";
-        footer.textContent = "WARRANTY CARD";
+
+        const footerTitle = document.createElement("span");
+        footerTitle.textContent = "WARRANTY CARD";
+
+        const footerSubtext = document.createElement("span");
+        footerSubtext.className = "card-subtext";
+        footerSubtext.textContent = "Warranty valid for 2 years from the date of issue.";
+
+        footer.append(footerTitle, footerSubtext);
         cardElement.appendChild(footer);
 
         cardsContainer.appendChild(cardElement);
